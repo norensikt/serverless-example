@@ -40,20 +40,20 @@ const typeDefs = gql`
   }
   
     type Query {
-        orders(id: ID): [Order!]
+        orders(id: ID, phoneNumber: String): [Order!]
     }
   
   input CreateOrderInput {
       phoneNumber: String!
       email: String!
       name: String!
-      
+
       services: [Service]!
       notes: String
       datetime: DateTime!
       addressFrom: String!
       addressTo: String!
-  } 
+  }
   
   type CreateOrderPayload {
     order: Order!
@@ -61,6 +61,7 @@ const typeDefs = gql`
   
   type Mutation {
       createOrder(input: CreateOrderInput!): CreateOrderPayload
+      updateOrder(input: CreateOrderInput!): CreateOrderPayload
   }
 `;
 
@@ -70,7 +71,8 @@ const resolvers = {
     orders: () => [],
   },
   Mutation: {
-    createOrder: (input) => null
+    createOrder: (input) => null,
+    updateOrder: (input) => null
   },
   Node: {
     __resolveType(node) {

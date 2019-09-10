@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "headers": {},
+  "queryStringParameters": {
+    "query": "{orders(phoneNumber: \"test\"){id\ncustomer{id\nphoneNumber\nemail\nname}\nservices\nnotes\ndatetime\naddressFrom\naddressTo}}"
+  }
+}

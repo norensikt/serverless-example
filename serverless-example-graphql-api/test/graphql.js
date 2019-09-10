@@ -8,6 +8,8 @@ const expect = mochaPlugin.chai.expect;
 let wrapped = mochaPlugin.getWrapper('graphql', '/handler.js', 'graphql');
 const orderListQueryEvent = require('./orderListQuery');
 const createOrderMutationEvent = require('./createOrderMutation');
+const updateOrderMutationEvent = require('./updateOrderMutation');
+const findOrderByPhoneNumberQueryEvent = require('./findOrderByPhoneNumberQuery');
 
 describe('graphql', () => {
   before((done) => {
@@ -29,4 +31,20 @@ describe('graphql', () => {
       expect(response.statusCode).to.equal(200);
     });
   })
+
+  it('update order mutation should return successfully', () => {
+    return wrapped.run(updateOrderMutationEvent).then((response) => {
+      console.log(response)
+      expect(JSON.parse(response.body)).to.not.property('errors')
+      expect(response.statusCode).to.equal(200);
+    });
+  })
+
+  it('find order by phone number query should return successfully', () => {
+    return wrapped.run(findOrderByPhoneNumberQueryEvent).then((response) => {
+      console.log(response)
+      expect(JSON.parse(response.body)).to.not.property('errors')
+      expect(response.statusCode).to.equal(200);
+    });
+  });
 });

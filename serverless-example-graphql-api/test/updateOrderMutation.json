@@ -1,0 +1,7 @@
+{
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"operationName\":null,\"variables\":{},\"query\":\"mutation {\\n  updateOrder(input: {phoneNumber: \\\"111\\\", name: \\\"123\\\", email: \\\"123\\\", services: [MOVING, PACKING, CLEANING], notes: \\\"123\\\", datetime: \\\"123\\\", addressFrom: \\\"123\\\", addressTo: \\\"123\\\"}) {\\n    order {\\n      id\\n    }\\n  }\\n}\\n\"}"
+}
