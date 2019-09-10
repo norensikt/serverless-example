@@ -32,7 +32,7 @@ Adding the above flows introduces a new user story, where sales rep has to updat
 ### Services
  - name: Moving | Packing | Cleaning
 
-### Custamer
+### Customer
  - Name
  - Phone number
  - Email

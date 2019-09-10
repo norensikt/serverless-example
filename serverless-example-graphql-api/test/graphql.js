@@ -6,15 +6,17 @@
 const mochaPlugin = require('serverless-mocha-plugin');
 const expect = mochaPlugin.chai.expect;
 let wrapped = mochaPlugin.getWrapper('graphql', '/handler.js', 'graphql');
-const helloQueryEvent = require('./helloQuery');
+const orderListQueryEvent = require('./orderListQuery');
 
 describe('graphql', () => {
   before((done) => {
     done();
   });
 
-  it('hello query should return successfully', () => {
-    return wrapped.run(helloQueryEvent).then((response) => {
+  it('list orders query should return successfully', () => {
+    return wrapped.run(orderListQueryEvent).then((response) => {
+      console.log(response)
+      expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });
   });

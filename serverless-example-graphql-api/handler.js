@@ -3,16 +3,65 @@ const { ApolloServer, gql } = require('apollo-server-lambda');
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
+  
+  scalar DateTime
+  
+  enum OrderStatus {
+      NEW
+      COMPLETED
+      DELETED
+  } 
+  
+  enum Service {
+      MOVING
+      PACKING
+      CLEANING
+  }
+  
+  interface Node {
+      id: ID!
+  }
+  
+  type Customer implements Node {
+      id: ID!
+      phoneNumber: String!
+      email: String! # TODO: Create custom type for validation purposes
+      name: String!
+  }
+  
+  type Order implements Node {
+      id: ID!
+      customer: Customer!
+      services: [Service!]
+      notes: String
+      datetime: DateTime
+      addressFrom: String!
+      addressTo: String!
+  }
+  
     type Query {
-        hello: String
+        orders(id: ID): [Order!]
     }
 `;
 
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: () => 'Hello world!',
+    orders: () => [],
   },
+  Node: {
+    __resolveType(node) {
+      // TODO: Should be a better way to figure out which object is what rather than checking for one of the fields
+      if (obj.email) {
+        return 'Customer'
+      }
+
+      if (obj.notes) {
+        return 'Order'
+      }
+      return null
+    }
+  }
 };
 
 const server = new ApolloServer({
