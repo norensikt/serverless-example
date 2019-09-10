@@ -8,3 +8,6 @@
 # TODO
 - Setup auth handler
 - Restrict client access using cors
+- service should be called order service
+    - possible to move customer to separate service depending on extensions to system
+- dynamodb tables names should be prefixed with service name
