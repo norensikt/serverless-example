@@ -34,7 +34,7 @@ const typeDefs = gql`
       customer: Customer!
       services: [Service!]
       notes: String
-      datetime: DateTime
+      datetime: DateTime!
       addressFrom: String!
       addressTo: String!
   }
@@ -42,12 +42,35 @@ const typeDefs = gql`
     type Query {
         orders(id: ID): [Order!]
     }
+  
+  input CreateOrderInput {
+      phoneNumber: String!
+      email: String!
+      name: String!
+      
+      services: [Service]!
+      notes: String
+      datetime: DateTime!
+      addressFrom: String!
+      addressTo: String!
+  } 
+  
+  type CreateOrderPayload {
+    order: Order!
+  }
+  
+  type Mutation {
+      createOrder(input: CreateOrderInput!): CreateOrderPayload
+  }
 `;
 
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
     orders: () => [],
+  },
+  Mutation: {
+    createOrder: (input) => null
   },
   Node: {
     __resolveType(node) {

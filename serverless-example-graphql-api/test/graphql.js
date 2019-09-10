@@ -7,6 +7,7 @@ const mochaPlugin = require('serverless-mocha-plugin');
 const expect = mochaPlugin.chai.expect;
 let wrapped = mochaPlugin.getWrapper('graphql', '/handler.js', 'graphql');
 const orderListQueryEvent = require('./orderListQuery');
+const createOrderMutationEvent = require('./createOrderMutation');
 
 describe('graphql', () => {
   before((done) => {
@@ -20,4 +21,12 @@ describe('graphql', () => {
       expect(response.statusCode).to.equal(200);
     });
   });
+
+  it('create order mutation should return successfully', () => {
+    return wrapped.run(createOrderMutationEvent).then((response) => {
+      console.log(response)
+      expect(JSON.parse(response.body)).to.not.property('errors')
+      expect(response.statusCode).to.equal(200);
+    });
+  })
 });
