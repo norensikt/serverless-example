@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "headers": {},
+  "queryStringParameters": {
+    "query": "{hello}"
+  }
+}
