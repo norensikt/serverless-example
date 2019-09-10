@@ -56,9 +56,21 @@ provider:
 #    - exclude-me.js
 #    - exclude-me-dir/**
 
+plugins:
+  - serverless-offline
+
 functions:
-  hello:
-    handler: handler.hello
+  graphql:
+    handler: handler.graphql
+    events:
+      - http:
+          path: graphql
+          method: get
+          cors: true
+      - http:
+          path: graphql
+          method: post
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

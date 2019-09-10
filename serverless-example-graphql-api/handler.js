@@ -1,18 +1,36 @@
 'use strict';
+const { ApolloServer, gql } = require('apollo-server-lambda');
 
-module.exports.hello = async event => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+// Construct a schema, using GraphQL schema language
+const typeDefs = gql`
+    type Query {
+        hello: String
+    }
+`;
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    hello: () => 'Hello world!',
+  },
 };
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+
+  // By default, the GraphQL Playground interface and GraphQL introspection
+  // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
+  //
+  // If you'd like to have GraphQL Playground and introspection enabled in production,
+  // the `playground` and `introspection` options must be set explicitly to `true`.
+  playground: true,
+  introspection: true,
+});
+
+module.exports.graphql = server.createHandler({
+  cors: {
+    origin: '*', // TODO: Restrict who can access the API, would be great if we can take the website domain as a variable
+    credentials: true,
+  }
+});
