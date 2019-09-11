@@ -10,3 +10,5 @@ $ npm --version
 
 ## Services
 - [General Documentation](./docs/README.md)
+- [Order Service](./serverless-example-graphql-api/README.md)
+- [Order Website](./serverless-example-order-website/README.md)

@@ -1,0 +1,12 @@
+name: website
+
+website:
+  component: '@serverless/website'
+  inputs:
+    code:
+      src: dist
+      hook: npm run build
+    domain: order.nor1.se
+    region: eu-west-1
+    stage: development
+
