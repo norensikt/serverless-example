@@ -17,7 +17,6 @@
 - service should be called order service
     - possible to move customer to separate service depending on extensions to system
 - dynamodb tables names should be prefixed with service name
-- put customer inside order object for now
 - this library provides some good abstractions for dynamodb https://www.npmjs.com/package/dynamodb-doc-client-wrapper
 - move dynamodb table configuration to separate file
 - move graphql related code and schema to separate files

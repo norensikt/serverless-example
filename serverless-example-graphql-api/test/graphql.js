@@ -21,7 +21,9 @@ describe('graphql', () => {
     done();
   });
 
-  let createdItem = null
+  // TODO: Other tests should not be depending on each other, possible solution, add initial data to local dynamodb and use that dataset in individual tests
+  let createdItem = null;
+
   // TODO: Should verify that data sent in mutation is what is returned
   it('create order mutation should return successfully', () => {
     return wrapped.run(createOrderMutationEvent).then((response) => {
@@ -30,12 +32,12 @@ describe('graphql', () => {
       expect(response.statusCode).to.equal(200);
       createdItem = JSON.parse(response.body).data.createOrder.order;
     });
-  })
+  });
 
   it('list orders query should return successfully', () => {
     return wrapped.run(orderListQueryEvent).then((response) => {
       // console.log(response)
-      expect(JSON.parse(response.body)).to.not.property('errors')
+      expect(JSON.parse(response.body)).to.not.property('errors');
       expect(response.statusCode).to.equal(200);
     });
   });
@@ -50,8 +52,7 @@ describe('graphql', () => {
 
   it('find order by phone number query should return successfully', () => {
     return wrapped.run(findOrderByPhoneNumberQueryEvent).then((response) => {
-      console.log(response)
-      console.log(createdItem);
+      // console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });
