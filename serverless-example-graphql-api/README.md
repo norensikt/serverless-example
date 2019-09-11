@@ -23,6 +23,7 @@
 - Add better documentation, both in README and in code
 - Use a linter to make sure code is up to common standards
 - How to handle migration / db changes? (also possibly filter out "invalid" data so client doesn't explode)
+- Items in dynamodb looks like they are stored wrong addressFrom = {"S": {"S": "..."}} seems weird
 
 # Notes
 When `sls remove` and `sls deploy` encountered this issue: https://github.com/serverless/serverless/issues/5057

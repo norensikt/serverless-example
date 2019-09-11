@@ -92,6 +92,16 @@ const updateOrder = async (id, data) => {
   }).then(() => ({ id, ...data }))
 };
 
+const deleteOrder = async (id) => {
+  return promisify(callback => {
+    const params = {
+      TableName: process.env.ORDER_TABLE_NAME,
+      Key: { orderId: id }
+    };
+    dynamoDb.delete(params, callback);
+  })
+};
+
 const getOrders = async (filter = {}) => {
   return promisify(callback => {
     const params = {
@@ -130,5 +140,6 @@ module.exports = {
   dynamoDb,
   createOrder,
   updateOrder,
-  getOrders
+  getOrders,
+  deleteOrder
 };

@@ -61,10 +61,15 @@ const typeDefs = gql`
     type CreateOrderPayload {
         order: Order!
     }
+    
+    type DeleteOrderPayload {
+        id: String!
+    }
 
     type Mutation {
         createOrder(input: CreateOrderInput!): CreateOrderPayload
         updateOrder(id: String!, input: CreateOrderInput!): CreateOrderPayload
+        deleteOrder(id: String!): DeleteOrderPayload
     }
 `;
 

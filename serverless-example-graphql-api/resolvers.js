@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const { dynamoDb, createOrder, updateOrder, getOrders } = require('./dynamodb');
+const { dynamoDb, createOrder, updateOrder, getOrders, deleteOrder } = require('./dynamodb');
 
 const promisify = foo => new Promise((resolve, reject) => {
   foo((error, result) => {
@@ -25,6 +25,11 @@ const resolvers = {
     updateOrder: (obj, args) => updateOrder(args.id, args.input).then(result => {
       return {
         order: result
+      }
+    }),
+    deleteOrder: (obj, args) => deleteOrder(args.id).then(result => {
+      return {
+        id: args.id
       }
     })
   },

@@ -10,6 +10,7 @@ const orderListQueryEvent = require('./orderListQuery');
 const createOrderMutationEvent = require('./createOrderMutation');
 const updateOrderMutationEvent = require('./updateOrderMutation');
 const findOrderByPhoneNumberQueryEvent = require('./findOrderByPhoneNumberQuery');
+const deleteOrderMutationEvent = require('./deleteOrderMutationEvent');
 
 const replaceIdInMutation = (mutationQueryEvent, id) => {
   mutationQueryEvent.body = mutationQueryEvent.body.replace('REPLACE_ME_WITH_REAL_ID', id)
@@ -57,4 +58,12 @@ describe('graphql', () => {
       expect(response.statusCode).to.equal(200);
     });
   });
+
+  it('delete order should return successfully', () => {
+    return wrapped.run(replaceIdInMutation(deleteOrderMutationEvent, createdItem.id)).then(response => {
+      console.log(response);
+      expect(JSON.parse(response.body)).to.not.property('errors')
+      expect(response.statusCode).to.equal(200);
+    })
+  })
 });

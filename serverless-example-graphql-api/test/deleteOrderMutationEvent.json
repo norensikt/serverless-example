@@ -1,0 +1,7 @@
+{
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"operationName\":null,\"variables\":{},\"query\":\"mutation {\\n  deleteOrder(id: \\\"REPLACE_ME_WITH_REAL_ID\\\") {\\n    id  }\\n}\\n\"}"
+}
