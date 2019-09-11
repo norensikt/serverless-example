@@ -27,7 +27,7 @@ describe('graphql', () => {
   // TODO: Should verify that data sent in mutation is what is returned
   it('create order mutation should return successfully', () => {
     return wrapped.run(createOrderMutationEvent).then((response) => {
-      // console.log(response)
+      console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors');
       expect(response.statusCode).to.equal(200);
       createdItem = JSON.parse(response.body).data.createOrder.order;
@@ -36,7 +36,7 @@ describe('graphql', () => {
 
   it('list orders query should return successfully', () => {
     return wrapped.run(orderListQueryEvent).then((response) => {
-      // console.log(response)
+      console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors');
       expect(response.statusCode).to.equal(200);
     });
@@ -44,7 +44,7 @@ describe('graphql', () => {
 
   it('update order mutation should return successfully', () => {
     return wrapped.run(replaceIdInMutation(updateOrderMutationEvent, createdItem.id)).then((response) => {
-      // console.log(response)
+      console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });
@@ -52,7 +52,7 @@ describe('graphql', () => {
 
   it('find order by phone number query should return successfully', () => {
     return wrapped.run(findOrderByPhoneNumberQueryEvent).then((response) => {
-      // console.log(response)
+      console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });

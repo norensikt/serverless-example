@@ -1,7 +1,5 @@
 {
-  "httpMethod": "GET",
+  "httpMethod": "POST",
   "headers": {},
-  "queryStringParameters": {
-    "query": "{orders{id\nphoneNumber\nemail\nname\nservices\nnotes\ndatetime\naddressFrom\naddressTo}}"
-  }
+  "body": "{\"operationName\":null,\"variables\":{},\"query\":\"{\\n  orders {\\n    id\\n    name\\n    email\\n    phoneNumber\\n    datetime\\n    addressTo\\n    addressFrom\\n    notes\\n    services\\n  }\\n}\\n\"}"
 }

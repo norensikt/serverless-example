@@ -33,6 +33,25 @@ provider:
   stage: development
   region: eu-west-1
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        #- dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        #- dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        #- dynamodb:DeleteItem
+      Resource:
+        "Fn::GetAtt": [ OrdersTable, Arn ]
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+      Resource:
+        - { "Fn::Join": [ "/", [
+          {"Fn::GetAtt": [ OrdersTable, Arn ] }, "index", "phoneNumberIndex"
+          ]]}
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -151,7 +170,7 @@ resources:
               - AttributeName: phoneNumber
                 KeyType: HASH
             Projection:
-              ProjectionType: KEYS_ONLY
+              ProjectionType: ALL
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1

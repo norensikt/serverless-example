@@ -4,6 +4,7 @@
 `sls deploy`
 `sls offline`
 `sls invoke test`
+`sls invoke test -l`
 
 `sls dynamodb install`
 `sls offline start`
@@ -21,3 +22,11 @@
 - cleanup test data after tests and improve test setup (currently you need to start dynamodb locally and run migrations for tests to pass, test data is not cleant up after either)
 - Add better documentation, both in README and in code
 - Use a linter to make sure code is up to common standards
+- How to handle migration / db changes? (also possibly filter out "invalid" data so client doesn't explode)
+
+# Notes
+When `sls remove` and `sls deploy` encountered this issue: https://github.com/serverless/serverless/issues/5057
+`An error occurred: ApiGatewayLogGroup - /aws/api-gateway/serverless-example-graphql-api-development already exists.`
+
+Going to manually remove the log group for now.
+
