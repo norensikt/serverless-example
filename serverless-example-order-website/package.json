@@ -1,42 +1,31 @@
 {
-  "name": "serverless-example-order-website",
+  "name": "order-site",
   "version": "0.1.0",
-  "description": "",
-  "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
-  },
-  "license": "MIT",
+  "private": true,
   "dependencies": {
-    "chart.js": "^2.8.0",
-    "moment": "^2.24.0",
-    "react": "^16.5.2",
-    "react-chartjs-2": "^2.7.6",
-    "react-dom": "^16.5.2"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1"
   },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "babel-preset-nano-react-app": "^0.1.0",
-    "parcel-bundler": "^1.11.0",
-    "parcel-plugin-clean-dist": "0.0.6"
+  "scripts": {
+    "start": "node_modules/.bin/react-scripts start",
+    "build": "node_modules/.bin/react-scripts build",
+    "test": "node_modules/.bin/react-scripts test",
+    "eject": "node_modules/.bin/react-scripts eject"
   },
-  "babel": {
-    "presets": [
-      "nano-react-app"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties",
-        {
-          "loose": true
-        }
-      ],
-      [
-        "@babel/plugin-transform-react-jsx",
-        {
-          "pragmaFrag": "React.Fragment"
-        }
-      ]
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   }
 }
