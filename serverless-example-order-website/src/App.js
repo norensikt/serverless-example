@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
-import { Button } from 'semantic-ui-react'
+import { Button, Container } from 'semantic-ui-react'
 
 import './App.css';
+import {ListOrder} from "./components/CreateOrderFormContainer";
+import OrderFormModal from "./components/OrderFormModal";
 
 function App() {
+
+  const [showOrderCreateForm, setShowOrderCreateForm] = useState(false);
+  const [activeOrder, setActiveOrder] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button>Semantic UI Button</Button>
-      </header>
-    </div>
+      <div>
+        <OrderFormModal open={showOrderCreateForm} onSuccess={() => {
+          setShowOrderCreateForm(false);
+          setActiveOrder(null);
+        }} order={activeOrder} />
+        <Container>
+          <Button onClick={() => setShowOrderCreateForm(true)}>
+            Create Order
+          </Button>
+        </Container>
+        <ListOrder handleRowClicked={order => {
+          setActiveOrder(order);
+          setShowOrderCreateForm(true)
+        }} />
+
+      </div>
   );
 }
 
