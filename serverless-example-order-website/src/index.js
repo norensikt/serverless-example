@@ -7,8 +7,9 @@ import * as serviceWorker from './serviceWorker';import 'semantic-ui-css/semanti
 import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider } from "react-apollo";
 
+// TODO: Fetch ApolloClient uri from env variables
 export const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/graphql' : 'https://dav209yem7.execute-api.eu-west-1.amazonaws.com/development/graphql',
 });
 
 ReactDOM.render(<ApolloProvider client={client}><App /></ApolloProvider>, document.getElementById('root'));
