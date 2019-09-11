@@ -11,30 +11,38 @@ const createOrderMutationEvent = require('./createOrderMutation');
 const updateOrderMutationEvent = require('./updateOrderMutation');
 const findOrderByPhoneNumberQueryEvent = require('./findOrderByPhoneNumberQuery');
 
+const replaceIdInMutation = (mutationQueryEvent, id) => {
+  mutationQueryEvent.body = mutationQueryEvent.body.replace('REPLACE_ME_WITH_REAL_ID', id)
+  return mutationQueryEvent
+}
+
 describe('graphql', () => {
   before((done) => {
     done();
   });
 
+  let createdItem = null
+  // TODO: Should verify that data sent in mutation is what is returned
+  it('create order mutation should return successfully', () => {
+    return wrapped.run(createOrderMutationEvent).then((response) => {
+      // console.log(response)
+      expect(JSON.parse(response.body)).to.not.property('errors');
+      expect(response.statusCode).to.equal(200);
+      createdItem = JSON.parse(response.body).data.createOrder.order;
+    });
+  })
+
   it('list orders query should return successfully', () => {
     return wrapped.run(orderListQueryEvent).then((response) => {
-      console.log(response)
+      // console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });
   });
 
-  it('create order mutation should return successfully', () => {
-    return wrapped.run(createOrderMutationEvent).then((response) => {
-      console.log(response)
-      expect(JSON.parse(response.body)).to.not.property('errors')
-      expect(response.statusCode).to.equal(200);
-    });
-  })
-
   it('update order mutation should return successfully', () => {
-    return wrapped.run(updateOrderMutationEvent).then((response) => {
-      console.log(response)
+    return wrapped.run(replaceIdInMutation(updateOrderMutationEvent, createdItem.id)).then((response) => {
+      // console.log(response)
       expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });
@@ -43,6 +51,7 @@ describe('graphql', () => {
   it('find order by phone number query should return successfully', () => {
     return wrapped.run(findOrderByPhoneNumberQueryEvent).then((response) => {
       console.log(response)
+      console.log(createdItem);
       expect(JSON.parse(response.body)).to.not.property('errors')
       expect(response.statusCode).to.equal(200);
     });

@@ -2,6 +2,6 @@
   "httpMethod": "GET",
   "headers": {},
   "queryStringParameters": {
-    "query": "{orders{id\ncustomer{id\nphoneNumber\nemail\nname}\nservices\nnotes\ndatetime\naddressFrom\naddressTo}}"
+    "query": "{orders{id\nphoneNumber\nemail\nname\nservices\nnotes\ndatetime\naddressFrom\naddressTo}}"
   }
 }

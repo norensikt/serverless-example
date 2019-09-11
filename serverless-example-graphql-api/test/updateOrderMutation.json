@@ -3,5 +3,5 @@
   "headers": {
     "Content-Type": "application/json"
   },
-  "body": "{\"operationName\":null,\"variables\":{},\"query\":\"mutation {\\n  updateOrder(input: {phoneNumber: \\\"111\\\", name: \\\"123\\\", email: \\\"123\\\", services: [MOVING, PACKING, CLEANING], notes: \\\"123\\\", datetime: \\\"123\\\", addressFrom: \\\"123\\\", addressTo: \\\"123\\\"}) {\\n    order {\\n      id\\n    }\\n  }\\n}\\n\"}"
+  "body": "{\"operationName\":null,\"variables\":{},\"query\":\"mutation {\\n  updateOrder(id: \\\"REPLACE_ME_WITH_REAL_ID\\\" input: {name: \\\"aaa\\\", email: \\\"aab\\\", phoneNumber: \\\"aac\\\", services: [MOVING, PACKING], datetime: \\\"aad\\\", addressTo: \\\"aae\\\", addressFrom: \\\"aaf\\\", notes: \\\"aag\\\"}) {\\n    order {\\n      id\\n      name\\n      email\\n      phoneNumber\\n      services\\n      datetime\\n      addressTo\\n      addressFrom\\n      notes\\n    }\\n  }\\n}\\n\"}"
 }

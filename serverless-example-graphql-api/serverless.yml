@@ -17,7 +17,9 @@ org: norensikt
 
 custom:
   orderTableName: "orders-${self:provider.stage}"
-  customerTableName: "customers-${self:provider.stage}"
+  dynamodb:
+    stages:
+      - development
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -50,6 +52,8 @@ provider:
 # you can define service wide environment variables here
 #  environment:
 #    variable1: value1
+  environment:
+    ORDER_TABLE_NAME: ${self:custom.orderTableName}
 
 # you can add packaging information here
 #package:
@@ -63,6 +67,7 @@ provider:
 plugins:
   - serverless-offline
   - serverless-mocha-plugin
+  - serverless-dynamodb-local
 
 functions:
   graphql:
@@ -129,28 +134,29 @@ functions:
 #       Value: "Some output value"
 resources:
   Resources:
-    CustomersTable:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: customerId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: customerId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:custom.customerTableName}
     OrdersTable:
       Type: "AWS::DynamoDB::Table"
       Properties:
         AttributeDefinitions:
           - AttributeName: orderId
             AttributeType: S
+          - AttributeName: phoneNumber
+            AttributeType: S
         KeySchema:
           - AttributeName: orderId
             KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: phoneNumberIndex
+            KeySchema:
+              - AttributeName: phoneNumber
+                KeyType: HASH
+            Projection:
+              ProjectionType: KEYS_ONLY
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+
+
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
